@@ -54,7 +54,6 @@ function EvolutionPopup({ evolutions, pokemonId, onClose }: EvolutionPopupProps)
         <div key={evolution.id} className="evolution">
           <Image
             src={evolution.image}
-            fill
             sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
