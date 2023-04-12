@@ -1,4 +1,5 @@
 import { useQuery, QueryResult, gql } from '@apollo/client';
+import Image from 'next/image'
 
 interface EvolutionPopupProps {
   evolutions: string;
@@ -35,7 +36,7 @@ const GET_POKEMON = gql`
   }
 `;
 
-function EvolutionPopup({ evolutions,pokemonId, onClose }: EvolutionPopupProps) {  
+function EvolutionPopup({ evolutions, pokemonId, onClose }: EvolutionPopupProps) {
   const { loading, error, data }: QueryResult<EvolutionData, EvolutionVariables> = useQuery<
     EvolutionData,
     EvolutionVariables
@@ -51,7 +52,14 @@ function EvolutionPopup({ evolutions,pokemonId, onClose }: EvolutionPopupProps) 
       <h3>Evolutions</h3>
       {data?.pokemon?.evolutions?.map((evolution) => (
         <div key={evolution.id} className="evolution">
-          <img src={evolution.image} alt={evolution.name} width={210} height={210} />
+          <Image
+            src={evolution.image}
+            fill
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+            alt={evolution.name}
+          />
           <p>{evolution.name}</p>
         </div>
       ))}

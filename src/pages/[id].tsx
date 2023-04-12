@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import EvolutionPopup from "../components/EvolutionPopup";
+import Image from 'next/image'
 interface Pokemon {
   id: string;
   number: string;
@@ -72,7 +73,14 @@ function PokemonDetails({ pokemon }: PokemonDetailsProps) {
   return (
     <div className="pokemon-details">
       <div className="pokemon-image">
-        <img src={pokemon.image} alt={pokemon.name} />
+        <Image
+          src={pokemon.image}
+          fill
+          sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+          alt={pokemon.name}
+        />
       </div>
       <div className="pokemon-info">
         <h2>{pokemon.name}</h2>
@@ -88,7 +96,7 @@ function PokemonDetails({ pokemon }: PokemonDetailsProps) {
           // @ts-ignore
           <EvolutionPopup pokemonId={pokemon.id} evolutions={data.pokemon.evolutions} onClose={() => setShowEvolutions(false)} />
         )}
-    </div>
+      </div>
     </div >
   );
 }
