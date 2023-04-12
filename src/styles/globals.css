@@ -1,0 +1,363 @@
+:root {
+  --max-width: 1100px;
+  --border-radius: 12px;
+  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+
+  --primary-glow: conic-gradient(
+    from 180deg at 50% 50%,
+    #16abff33 0deg,
+    #0885ff33 55deg,
+    #54d6ff33 120deg,
+    #0071ff33 160deg,
+    transparent 360deg
+  );
+  --secondary-glow: radial-gradient(
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
+
+  --tile-start-rgb: 239, 245, 249;
+  --tile-end-rgb: 228, 232, 233;
+  --tile-border: conic-gradient(
+    #00000080,
+    #00000040,
+    #00000030,
+    #00000020,
+    #00000010,
+    #00000010,
+    #00000080
+  );
+
+  --callout-rgb: 238, 240, 241;
+  --callout-border-rgb: 172, 175, 176;
+  --card-rgb: 180, 185, 188;
+  --card-border-rgb: 131, 134, 135;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+
+    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
+    --secondary-glow: linear-gradient(
+      to bottom right,
+      rgba(1, 65, 255, 0),
+      rgba(1, 65, 255, 0),
+      rgba(1, 65, 255, 0.3)
+    );
+
+    --tile-start-rgb: 2, 13, 46;
+    --tile-end-rgb: 2, 5, 19;
+    --tile-border: conic-gradient(
+      #ffffff80,
+      #ffffff40,
+      #ffffff30,
+      #ffffff20,
+      #ffffff10,
+      #ffffff10,
+      #ffffff80
+    );
+
+    --callout-rgb: 20, 20, 20;
+    --callout-border-rgb: 108, 108, 108;
+    --card-rgb: 100, 100, 100;
+    --card-border-rgb: 200, 200, 200;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+.pokemon-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .pokemon-list {
+    justify-content: space-between;
+  }
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.pagination button {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #333;
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.pagination span {
+  margin: 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.pokemon-card {
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin-bottom: 16px;
+  padding: 16px;
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.pokemon-card:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.pokemon-card img {
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.pokemon-card h3 {
+  margin: 8px 0;
+  text-transform: capitalize;
+}
+
+.pokemon-types {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.pokemon-type {
+  background-color: #eaeaea;
+  border-radius: 10px;
+  color: #555;
+  font-size: 12px;
+  margin-right: 4px;
+  padding: 4px 8px;
+  text-transform: capitalize;
+}
+
+.pokemon-type.bug {
+  background-color: #8cb230;
+  color: #fff;
+}
+
+.pokemon-type.dark {
+  background-color: #58575f;
+  color: #fff;
+}
+
+.pokemon-type.dragon {
+  background-color: #0f6ac0;
+  color: #fff;
+}
+
+.pokemon-type.electric {
+  background-color: #eed535;
+  color: #fff;
+}
+
+.pokemon-type.fairy {
+  background-color: #ed6ec7;
+  color: #fff;
+}
+
+.pokemon-type.fighting {
+  background-color: #d04164;
+  color: #fff;
+}
+
+.pokemon-type.fire {
+  background-color: #fd7d24;
+  color: #fff;
+}
+
+.pokemon-type.flying {
+  background-color: #748fc9;
+  color: #fff;
+}
+
+.pokemon-type.ghost {
+  background-color: #556aae;
+  color: #fff;
+}
+
+.pokemon-type.grass {
+  background-color: #62b957;
+  color: #fff;
+}
+
+.pokemon-type.ground {
+  background-color: #dd7748;
+  color: #fff;
+}
+
+.pokemon-type.ice {
+  background-color: #61cec0;
+  color: #fff;
+}
+
+.pokemon-type.normal {
+  background-color: #9da0aa;
+  color: #fff;
+}
+
+.pokemon-type.poison {
+  background-color: #a552cc;
+  color: #fff;
+}
+
+.pokemon-type.psychic {
+  background-color: #ea5d60;
+  color: #fff;
+}
+
+.pokemon-type.rock {
+  background-color: #baab82;
+  color: #fff;
+}
+
+.pokemon-type.steel {
+  background-color: #417d9a;
+  color: #fff;
+}
+
+.pokemon-type.water {
+  background-color: #4a90da;
+  color: #fff;
+}
+
+.pokemon-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: #f0f0f0;
+}
+
+.pokemon-image img {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+}
+
+.pokemon-info {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-info h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  color: #333;
+}
+
+.pokemon-info p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.pokemon-info button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background-color: #f44336;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pokemon-info button:hover {
+  background-color: #ff6659;
+}
+
+.evolution-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 90%;
+  margin: 3%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.evolution-popup .popup-content {
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 250px;
+  margin: auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 0.5;
+  color: #333333;
+}
