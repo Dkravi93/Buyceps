@@ -1,5 +1,4 @@
-import { useQuery, QueryResult } from '@apollo/client';
-import gql from 'graphql-tag';
+import { useQuery, QueryResult, gql } from '@apollo/client';
 
 interface EvolutionPopupProps {
   evolutions: string;
