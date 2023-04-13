@@ -13,16 +13,22 @@ interface Props {
 }
 
 function PokemonCard({ pokemon }: Props) {
-  
+
   return (
     <Link href={`/${pokemon.id}`}>
       <div className="pokemon-card">
-      <Image
-          src={pokemon.image}
-          sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-          alt={pokemon.name}
+        <Image
+            src={pokemon.image}
+            sizes="(max-width: 768px) 100vw,
+          (max-width: 1200px) 50vw,
+          33vw"
+            alt={pokemon.name}
+            width={210}
+            height={210}
+            style={{
+              width: "auto" || 210,
+              height: "auto" || 210
+            }}
         />
         <h3>
           #{pokemon.number} {pokemon.name}

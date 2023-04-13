@@ -75,11 +75,17 @@ function PokemonDetails({ pokemon }: PokemonDetailsProps) {
     <div className="pokemon-details">
       <div className="pokemon-image">
         <Image
-          src={pokemon.image}
-          sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-          alt={pokemon.name}
+            src={pokemon.image}
+            sizes="(max-width: 768px) 100vw,
+          (max-width: 1200px) 50vw,
+          33vw"
+            alt={pokemon.name}
+            width={210}
+            height={210}
+            style={{
+              width: "auto" || 210,
+              height: "auto" || 210
+            }}
         />
       </div>
       <div className="pokemon-info">
@@ -110,6 +116,7 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
       id: params.id,
     },
   });
+  
   return {
     props: {
       pokemon: data.pokemon,

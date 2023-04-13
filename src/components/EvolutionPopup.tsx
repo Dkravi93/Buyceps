@@ -55,9 +55,11 @@ function EvolutionPopup({ evolutions, pokemonId, onClose }: EvolutionPopupProps)
           <Image
             src={evolution.image}
             sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
+          (max-width: 1200px) 50vw,
+          33vw"
             alt={evolution.name}
+            width={210}
+            height={210}
           />
           <p>{evolution.name}</p>
         </div>
