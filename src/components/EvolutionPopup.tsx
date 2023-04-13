@@ -60,6 +60,10 @@ function EvolutionPopup({ evolutions, pokemonId, onClose }: EvolutionPopupProps)
             alt={evolution.name}
             width={210}
             height={210}
+            style={{
+              width: "auto" || 210,
+              height: "auto" || 210
+            }}
           />
           <p>{evolution.name}</p>
         </div>
