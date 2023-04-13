@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import EvolutionPopup from "../components/EvolutionPopup";
 import Image from 'next/image'
+import { initializeApollo } from '@/lib/apolloClient';
 interface Pokemon {
   id: string;
   number: string;
@@ -101,46 +102,14 @@ function PokemonDetails({ pokemon }: PokemonDetailsProps) {
 }
 
 export async function getStaticProps({ params }: { params: { id: string } }) {
-  const res = await fetch(`https://graphql-pokemon2.vercel.app/`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: `
-        query GetPokemon($id: String!) {
-          pokemon(id: $id) {
-            id
-            number
-            name
-            image
-            height {
-              minimum
-              maximum
-            }
-            weight {
-              minimum
-              maximum
-            }
-            classification
-            types
-            resistant
-            weaknesses
-            evolutions {
-              id
-              name
-              image
-            }
-          }
-        }
-      `,
-      variables: {
-        id: params.id,
-      },
-    }),
-  });
+  const apolloClient = initializeApollo();
 
-  const { data } = await res.json();
+  const { data } = await apolloClient.query({
+    query: GET_POKEMON,
+    variables: {
+      id: params.id,
+    },
+  });
   return {
     props: {
       pokemon: data.pokemon,

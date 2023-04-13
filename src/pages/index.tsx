@@ -1,6 +1,7 @@
 import { useQuery, gql } from '@apollo/client';
 import PokemonCard from '../components/PokemonCard';
 import Pagination from '../components/Pagination';
+import { initializeApollo } from '@/lib/apolloClient';
 
 interface Pokemon {
   id: string;
@@ -72,49 +73,19 @@ function Home({ pokemons }: HomeProps) {
 }
 // @ts-ignore
 export async function getStaticProps({ params }) {
-  const res = await fetch('https://graphql-pokemon2.vercel.app/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: `
-      query pokemons($first: Int!){
-        pokemons(first: $first){
-          id
-          number
-          name
-          weight{
-            minimum
-            maximum
-          }
-          height{
-            minimum
-            maximum
-          }
-          classification
-          types
-          resistant
-          weaknesses
-          fleeRate
-          maxCP
-          maxHP
-          image
-        }
-      }
-      `,
-      variables: {
-        first: 20,
-        after: null
-      },
-    }),
-  });
+  const apolloClient = initializeApollo();
 
-  const { data } = await res.json();
+  await apolloClient.query({
+    query: GET_POKEMONS,
+    variables: {
+      first: 20,
+      after: null,
+    },
+  });
 
   return {
     props: {
-      pokemons: data.pokemons,
+      initialApolloState: apolloClient.cache.extract(),
     },
     revalidate: 60,
   };
