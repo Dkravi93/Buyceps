@@ -27,23 +27,29 @@ interface PokemonsVars {
 }
 
 const GET_POKEMONS = gql`
-  query GetPokemons($first: Int!, $after: String) {
-    pokemons(first: $first, after: $after) {
-      edges {
-        node {
-          id
-          number
-          name
-          image
-          types
-        }
-      }
-      pageInfo {
-        endCursor
-        hasNextPage
-      }
+query pokemons($first: Int!){
+  pokemons(first: $first){
+    id
+    number
+    name
+    weight{
+      minimum
+      maximum
     }
+    height{
+      minimum
+      maximum
+    }
+    classification
+    types
+    resistant
+    weaknesses
+    fleeRate
+    maxCP
+    maxHP
+    image
   }
+}
 `;
 
 interface HomeProps {
@@ -72,22 +78,21 @@ function Home({ pokemons }: HomeProps) {
   );
 }
 // @ts-ignore
-export async function getStaticProps({ params }) {
+export async function getStaticProps() {
   const apolloClient = initializeApollo();
 
-  await apolloClient.query({
+  const { data } = await apolloClient.query<PokemonsData, PokemonsVars>({
     query: GET_POKEMONS,
-    variables: {
-      first: 20,
-      after: null,
-    },
+    variables: { first: 20, after: null },
   });
 
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
+      pokemons: data.pokemons,
     },
     revalidate: 60,
   };
 }
+
 export default Home;
